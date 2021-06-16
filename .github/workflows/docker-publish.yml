@@ -35,13 +35,13 @@ jobs:
         uses: FranzDiebold/github-env-vars-action@v1.2.0
 
       - name: Generate Custom TAG
-        env:
-          FPMTAG: 8-fpm-${{ env.GITHUB_REF_NAME_SLUG }}
+        run: |
+          echo "FPMTAG=8-fpm-$GITHUB_REF_NAME_SLUG" >> $GITHUB_ENV
 
       - name: Set different Tag for master branch
         if: env.GITHUB_REF_NAME_SLUG == 'master'
-        env:
-          FPMTAG: 8-fpm
+        run: |
+          echo "FPMTAG=8-fpm" >> $GITHUB_ENV
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -94,6 +94,9 @@ jobs:
           tags: |
             ${{ steps.meta.outputs.tags }}
             ghcr.io/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ env.FPMTAG }}
             quay.home.olqs.de/${{ env.IMAGE_NAME }}:latest
+            quay.home.olqs.de/${{ env.IMAGE_NAME }}:${{ env.FPMTAG }}
             ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ env.FPMTAG }}
           labels: ${{ steps.meta.outputs.labels }}
