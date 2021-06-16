@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Extract Github Env Vars
-        uses: FranzDiebold/github-env-vars-action@v1.2.0
+        uses: FranzDiebold/github-env-vars-action@v2.3.0
 
       - name: Generate Custom TAG
         run: |
