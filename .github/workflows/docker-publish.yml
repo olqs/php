@@ -36,10 +36,10 @@ jobs:
 
       - name: Generate Custom TAG
         run: |
-          echo "FPMTAG=8-fpm-$GITHUB_REF_NAME_SLUG" >> $GITHUB_ENV
+          echo "FPMTAG=8-fpm-$CI_REF_NAME_SLUG" >> $GITHUB_ENV
 
       - name: Set different Tag for master branch
-        if: env.GITHUB_REF_NAME_SLUG == 'master'
+        if: env.CI_REF_NAME_SLUG == 'master'
         run: |
           echo "FPMTAG=8-fpm" >> $GITHUB_ENV
 
